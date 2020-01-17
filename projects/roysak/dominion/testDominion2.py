@@ -8,17 +8,20 @@ import testUtility
 import random
 
 
-def bug(supply_order):
+def bug(box):
     """
-    The supply order is a key-value object relating
-    the cost of a card to the names of the card. The 
-    following bug generates a new supply order object by
-    replacing each cost with a random ASCII character between
-    65-90 [A-Z] and assigns to it the cards associated with the initial cost
+    The box object is a key-value pair object
+    that relates Card Names to Card Objects. The
+    following bug randomly assigns to each Card Name
+    a random Card Object.
     """
 
-    for value in list(supply_order):
-        supply_order[chr(random.randint(65,90))] = supply_order.pop(value)
+    cardObjects = list(box.values())
+    buggyBox = {}
+    for card in box:    
+        buggyBox[card] = cardObjects[random.randint(0, len(cardObjects)-1)]
+
+    return buggyBox
 
 def main():
     #Set player names
@@ -30,6 +33,7 @@ def main():
 
     #Define box
     box = testUtility.getBoxes(nV)
+    box = bug(box)
 
     #Get Supply order
     supply_order = testUtility.getSupplyOrder()
@@ -40,7 +44,7 @@ def main():
     #Get players for the game
     players = testUtility.getPlayers(player_names)
     
-    bug(supply_order)
+    
     testUtility.play(supply, supply_order, players)
 
 if __name__ == "__main__":
