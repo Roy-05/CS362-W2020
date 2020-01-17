@@ -9,16 +9,14 @@ import Dominion
 import random
 from collections import defaultdict
 
-#Returns the names of players in the game
-def getPlayerNames():
-    
-    #Set Play names
-    player_names = ["*Annie","*Ben","*Carla"]
-
-    return player_names
-
 
 def get_nV(player_names):
+    """
+    Returns the number of Victory Cards in play.
+    Takes player_names as argument that represents
+    an array of the names of the players in the game
+    """
+
     if len(player_names)>2:
         nV=12
     else:
@@ -28,15 +26,23 @@ def get_nV(player_names):
 
 
 def get_nC(player_names):
+    """
+    Returns the number of Curse Cards in play
+    takes player_names as argument that represents
+    an array of the names of the players in the game
+    """
+
     nC = -10 + 10 * len(player_names)
 
     return nC
 
 
-#Return a box object
-#takes nV as an argument that represents 
-#the number of Victory Cards in play
 def getBoxes(nV): 
+    """
+    Returns a box object
+    takes nV as an argument that represents 
+    the number of Victory Cards in play
+    """
 
     #Create a box object
     box = {}
@@ -69,8 +75,11 @@ def getBoxes(nV):
     return box
 
 
-#Returns the supply order for the game
 def getSupplyOrder():
+    """
+    Returns the supply order for the game
+    """
+
     supply_order = {0:['Curse','Copper'],2:['Estate','Cellar','Chapel','Moat'],
                 3:['Silver','Chancellor','Village','Woodcutter','Workshop'],
                 4:['Gardens','Bureaucrat','Feast','Militia','Moneylender','Remodel','Smithy','Spy','Thief','Throne Room'],
@@ -81,6 +90,12 @@ def getSupplyOrder():
 
 
 def getSupply(box, player_names, nV, nC):
+    """
+    Returns a randomized supply for the current game. 
+    Takes in arguments the current box object, supply order, 
+    and the number of Victory Cards and Curses in play.
+    """
+
     #Pick 10 cards from box to be in the supply.
     boxlist = [k for k in box]
     random.shuffle(boxlist)
@@ -100,8 +115,11 @@ def getSupply(box, player_names, nV, nC):
     return supply
 
 
-#Costruct the Player objects
 def getPlayers(player_names):
+    """
+    Returns the Player objects constructed from Dominion.py
+    """
+
     players = []
     for name in player_names:
         if name[0]=="*":
@@ -115,6 +133,9 @@ def getPlayers(player_names):
 
 
 def play(supply, supply_order, players):
+    """
+    Implement play logic to run the game
+    """
 
     #initialize the trash
     trash = []
