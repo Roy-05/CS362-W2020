@@ -8,6 +8,22 @@ import testUtility
 import random
 
 
+def bug(box):
+    """
+    The box object is a key-value pair object
+    that relates Card Names to Card Objects. The
+    following bug randomly assigns to each Card Name
+    a random Card Object.
+    """
+
+    cardObjects = list(box.values())
+    buggyBox = {}
+    for card in box:    
+        buggyBox[card] = cardObjects[random.randint(0, len(cardObjects)-1)]
+
+    return buggyBox
+
+
 #Set player names
 player_names = ["Annie","*Ben","*Carla"]
 
@@ -30,19 +46,3 @@ players = testUtility.getPlayers(player_names)
 
 
 testUtility.play(supply, supply_order, players)
-
-
-def bug(box):
-    """
-    The box object is a key-value pair object
-    that relates Card Names to Card Objects. The
-    following bug randomly assigns to each Card Name
-    a random Card Object.
-    """
-
-    cardObjects = list(box.values())
-    buggyBox = {}
-    for card in box:    
-        buggyBox[card] = cardObjects[random.randint(0, len(cardObjects)-1)]
-
-    return buggyBox
